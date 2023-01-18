@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 function Topnav() {
-  const [isLoggedIn, setIsLoggedin] = useState(true);
+  const [isLoggedIn, setIsLoggedin] = useState(false);
 
   return (
     <nav className='topnav'>
