@@ -1,0 +1,36 @@
+#topnav {
+    background-color: #D1D1E9;
+    padding: 0.75rem;
+}
+
+.topnav {
+   justify-content: space-between;
+   align-items: center;
+}
+
+.logo{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.navlist {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.greeting {
+    padding: 0.75rem 1.5rem;
+}
+
+.navlist a{ 
+    color: #2B2C34;
+    display: block;
+    padding: 0.75rem 1.5rem;
+}
+
+  .navlist a:hover {
+    color: #fffffe;
+    background-color: #6246EA;
+    border-radius: 4px;
+}

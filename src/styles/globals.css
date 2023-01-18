@@ -1,9 +1,19 @@
+/* 
+==============================
+Reset
+==============================
+*/
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+}
+
+body {
+    font-family: sans-serif;
 }
 
 a {
@@ -25,6 +35,31 @@ textarea,
 select {
     font: inherit;
 }
+
+
+/* 
+==============================
+Utility Classes
+==============================
+*/
+
+.container {
+    max-width: 1366px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+
+
+
+
 
 
 
