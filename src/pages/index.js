@@ -1,9 +1,10 @@
 import Layout from "@/components/layout"
+import Banner from "@/components/banner";
 
 export default function Home() {
   return (
     <Layout>
-      <h1>Homepage</h1>
+      <Banner />
     </Layout>
   );
 }
