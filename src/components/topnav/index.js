@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import styles from './topnav.module.css';
 
 function Topnav() {
   const [isLoggedIn, setIsLoggedin] = useState(false);
+  const router = useRouter();
+  const currentPath = router.pathname;
 
   return (
     <nav id={styles['topnav']}>
@@ -13,9 +16,7 @@ function Topnav() {
         <p className={styles.logo}>ENV.</p>
         <ul className={styles.navlist}>
           <li>
-            <Link
-              href='/'
-            >
+            <Link href='/' className={currentPath === '/' ? styles.active : ''}>
               Home
             </Link>
           </li>
@@ -24,12 +25,20 @@ function Topnav() {
               <li>
                 <Link
                   href='/auth/login'
+                  className={currentPath === '/auth/login' ? styles.active : ''}
                 >
                   Login
                 </Link>
               </li>
               <li>
-                <Link href='/auth/signup'>Sign up</Link>
+                <Link
+                  href='/auth/signup'
+                  className={
+                    currentPath === '/auth/signup' ? styles.active : ''
+                  }
+                >
+                  Sign up
+                </Link>
               </li>{' '}
             </>
           ) : (
