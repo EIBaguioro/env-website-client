@@ -1,0 +1,58 @@
+#signup {
+    background-color: #D1D1E9;
+}
+
+.signup {
+    height: 100vh;
+    position: relative;
+}
+
+.signup form {
+    width: 35%;
+    padding: 3rem 3rem;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.signup form h3 {
+    font-size: 2rem;
+    margin-bottom: 1.8rem;
+}
+
+.signup input,
+.signup button {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-bottom: 2rem;
+}
+
+.signup input {
+    font-size: 1.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #2b2c34;
+    background-color: #fff;
+}
+
+.signup input:focus,
+.signup input:active {
+    background-color: transparent;
+}
+
+.signup button {
+    border-radius: 4px;
+}
+
+.signup button:hover {
+    cursor: pointer;
+}
+
+.signup p a {
+    color: #2b2c34;
+}
