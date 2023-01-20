@@ -24,6 +24,7 @@
     height: 500px;
     width: 400px;
     position: relative;
+    overflow: hidden;
 }
 
 .image-container img {
