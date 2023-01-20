@@ -13,7 +13,7 @@ function Topnav() {
   return (
     <nav id={styles['topnav']}>
       <div className={`container flex ${styles.topnav}`}>
-        <p className={styles.logo}>ENV.</p>
+        <Link href="/" className={styles.logo}>ENV.</Link>
         <ul className={styles.navlist}>
           <li>
             <Link href='/' className={currentPath === '/' ? styles.active : ''}>
