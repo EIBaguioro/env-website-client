@@ -29,6 +29,7 @@ function Banner() {
             className='banner-image'
             width={300}
             height={300}
+            alt=""
           />
         </div>
       </div>
