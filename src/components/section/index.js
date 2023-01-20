@@ -8,7 +8,8 @@ function Section(){
         <section className={`container flex ${styles.courses}`}>
           <div className={styles.course}>
             <Image
-              priority
+              placeholder='blur'
+              blurDataURL='/images/beginner.webp'
               alt=''
               src='/images/beginner.webp'
               width={350}
@@ -18,7 +19,8 @@ function Section(){
           </div>
           <div className={styles.course}>
             <Image
-              priority
+              placeholder='blur'
+              blurDataURL='/images/intermediate.webp'
               alt=''
               src='/images/intermediate.webp'
               width={350}
@@ -28,7 +30,8 @@ function Section(){
           </div>
           <div className={styles.course}>
             <Image
-              priority
+              placeholder='blur'
+              blurDataURL='/images/advanced.webp'
               alt=''
               src='/images/advanced.webp'
               width={350}

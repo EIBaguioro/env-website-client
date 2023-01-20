@@ -18,18 +18,21 @@ function Banner() {
       <div className={`container flex ${styles.banner}`}>
         <div className={styles['call-to-action']}>
           <p>{bannerText}</p>
-          {isButtonActive && <Link href='/auth/signup' className="btn">
-            Sign up
-          </Link>}
+          {isButtonActive && (
+            <Link href='/auth/signup' className='btn'>
+              Sign up
+            </Link>
+          )}
         </div>
         <div className={styles['image-container']}>
           <Image
-            priority
+            placeholder='blur'
+            blurDataURL={`/images/${bannerImage}`}
             src={`/images/${bannerImage}`}
             className='banner-image'
             width={300}
             height={300}
-            alt=""
+            alt=''
           />
         </div>
       </div>
