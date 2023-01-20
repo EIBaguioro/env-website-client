@@ -7,8 +7,19 @@ function Signup() {
       <div className={`container ${styles.signup}`}>
         <form>
           <h3>Sign Up</h3>
-          <input type="text" name="name" id="name" placeholder='name'/>
-          <input type='email' name='email' id='email' placeholder='email' />
+          <input
+            type='text'
+            name='name'
+            id='name'
+            placeholder='name'
+            autoComplete='false'
+          />
+          <input
+            type='email'
+            name='email'
+            id='email'
+            placeholder='email'
+          />
           <input
             type='password'
             name='password'
@@ -17,8 +28,7 @@ function Signup() {
           />
           <button className='btn'>Sign up</button>
           <p>
-            You don't have an account yet.{' '}
-            <Link href='/auth/login'>Login</Link>
+            You don't have an account yet. <Link href='/auth/login'>Login</Link>
           </p>
         </form>
       </div>
