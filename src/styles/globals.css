@@ -24,7 +24,7 @@ ul {
     list-style: none;
 }
 
-img, picture {
+img, picture, video {
     max-width: 100%;
     display: block;
 }

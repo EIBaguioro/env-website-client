@@ -1,0 +1,49 @@
+#category {
+
+}
+
+.category main {
+    height: calc(100vh - 100px);
+    flex-basis:65%;
+    border: 1px solid #D1D1E9;
+    border-right: none;
+}
+
+.description {
+    padding: 1.5rem;
+}
+
+.description h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.description p {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.category aside {
+    flex-basis: 35%;
+}
+
+.sidenav {
+    text-align: center;
+    border: 1px solid #D1D1E9;
+}
+
+.sidenav h3 {
+    padding: 1rem;
+    font-size: 2.5rem;
+    border: none;
+    border-bottom: 1px solid #D1D1E9;
+}
+
+.sidenav li {
+    font-size: 1.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    border: none;
+    border-bottom: 1px solid #D1D1E9;
+}
