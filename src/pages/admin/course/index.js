@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Layout from '../../../components/layout';
 
 import 'react-quill/dist/quill.snow.css';
-import styles from './dashboard.module.css';
+import styles from './course.module.css';
 
 function Course() {
   
