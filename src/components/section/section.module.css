@@ -24,8 +24,10 @@
     margin-bottom: 1rem;
 }
 
-.course p {
+.course a {
+    color: #2B2C34;
     font-weight: 600;
+    display: block;
     text-align: center;
     font-size: 1.5rem;
 }

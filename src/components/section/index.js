@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+
 import styles from './section.module.css';
 
 function Section(){
@@ -15,7 +17,9 @@ function Section(){
               width={350}
               height={300}
             />
-            <p className='course-title'>Beginner</p>
+            <Link href='/course/category' className='course-title'>
+              Beginner
+            </Link>
           </div>
           <div className={styles.course}>
             <Image
@@ -26,7 +30,9 @@ function Section(){
               width={350}
               height={300}
             />
-            <p className='course-title'>Intermediate</p>
+            <Link href='/course/category' className='course-title'>
+              Intermediate
+            </Link>
           </div>
           <div className={styles.course}>
             <Image
@@ -37,7 +43,9 @@ function Section(){
               width={350}
               height={300}
             />
-            <p className='course-title'>Advanced</p>
+            <Link href='/course/category' className='course-title'>
+              Advanced
+            </Link>
           </div>
         </section>
       </div>
