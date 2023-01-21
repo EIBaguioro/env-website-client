@@ -28,6 +28,7 @@ function Category() {
                 cupiditate reiciendis quos rerum? Ab ad iure corporis
                 perferendis odio?
               </p>
+              <button className='btn'>Enroll to this course</button>
             </article>
           </main>
           <aside className={styles.sidenav}>

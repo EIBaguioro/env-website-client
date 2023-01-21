@@ -22,6 +22,14 @@
     font-size: 1.5rem;
     line-height: 1.6;
     text-align: justify;
+    margin-bottom: 2rem;
+}
+
+.description button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
 .category aside {
