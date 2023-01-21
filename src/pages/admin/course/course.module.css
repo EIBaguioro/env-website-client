@@ -1,0 +1,80 @@
+.dashboard {
+    height: calc(100vh - 100px);
+    gap: 2rem;
+    padding: 3rem 0;
+}
+
+.dashboard main {
+    width: 70%;
+}
+
+.dashboard aside {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title {
+    display: block;
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    outline: none;
+}
+
+.editor {
+    height: 300px;
+}
+
+.section {
+    border: 1px solid #ccc;
+    padding: 1.5rem 1.5rem;
+}
+
+.section h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.publish::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.publish button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+.form-control {
+    margin-bottom: 0.75rem;
+}
+
+.form-control label {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    vertical-align:baseline
+}
+
+.form-control label[for="file"] {
+    text-decoration: underline;
+}
+
+.form-control select {
+    text-transform: capitalize;
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.75rem;
+    margin-left: 0.75rem;
+    outline: none;
+
+}
+
+.form-control input[type="radio"] {
+    margin-right: 0.75rem;
+}
+
