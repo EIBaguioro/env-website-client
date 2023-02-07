@@ -3,7 +3,6 @@
 }
 
 .category main {
-    height: calc(100vh - 100px);
     flex-basis:65%;
     border: 1px solid #D1D1E9;
     border-right: none;
