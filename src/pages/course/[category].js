@@ -1,44 +1,72 @@
+import axios from 'axios';
+import { useEffect, useState, useRef } from 'react';
 import Layout from '../../components/layout';
 
 import styles from './category.module.css';
 
 function Category() {
+
+  const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState({});
+
+  const getCourses = async () => {
+    
+    try {
+      const availableCourses = await axios.get(
+        `http://localhost:8000/api/courses/filter?category="beginner"`
+      );
+      return availableCourses.data;
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  const filterCourse = (id) => courses.filter( course => course.id === id);
+
+  const selectCourse = (id) => {
+
+    const filteredCourse = filterCourse(id);
+
+    setSelectedCourse(...filteredCourse);
+
+  }
+
+  useEffect(() => {
+    getCourses().then(data => {
+      setCourses(data)
+      setSelectedCourse(data[0]);
+    });
+  }, []);
+
   return (
     <Layout>
-      <div id={styles['category']}>
+      <div id={styles["category"]}>
         <div className={`container flex ${styles.category}`}>
           <main>
-            <video controls autoPlay muted loop width='100%'>
-              <source src='/videos/sample.mp4' type='mp4' />
+            <video
+              src={selectedCourse.videoUrl}
+              controls
+              muted
+              loop
+              width="100%"
+            >
             </video>
             <article className={styles.description}>
-              <h3>Video Title Here</h3>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Veritatis minus animi alias provident incidunt eaque possimus,
-                earum itaque doloremque assumenda ex asperiores nobis repellat
-                repudiandae fuga a illo, facilis repellendus odio dolore
-                inventore sint ratione quod debitis! Numquam commodi dolor
-                facilis eaque, exercitationem consectetur voluptas eius sint,
-                recusandae sequi adipisci at hic deleniti harum laboriosam
-                repudiandae quae maiores ad fugit expedita voluptates. Sit natus
-                perspiciatis fugit error, modi delectus sed quidem, dolor,
-                explicabo temporibus rerum cum cupiditate velit. Neque sunt a
-                necessitatibus vero sint facere odit illum ea vel, vitae
-                cupiditate reiciendis quos rerum? Ab ad iure corporis
-                perferendis odio?
-              </p>
-              <button className='btn'>Enroll to this course</button>
+              <h3>{selectedCourse.title}</h3>
+              <p>{selectedCourse.desc}</p>
+              {/* <button className="btn">Enroll to this course</button> */}
             </article>
           </main>
           <aside className={styles.sidenav}>
             <h3>Course Content</h3>
             <ul>
-              <li>Video Title Here</li>
-              <li>Video Title Here</li>
-              <li>Video Title Here</li>
-              <li>Video Title Here</li>
-              <li>Video Title Here</li>
+              {courses.map(({ id, title }) => {
+                return (
+                  <li key={id} onClick={() => selectCourse(id)}>
+                    {title}
+                  </li>
+                );
+              })}
             </ul>
           </aside>
         </div>
@@ -46,5 +74,6 @@ function Category() {
     </Layout>
   );
 }
+
 
 export default Category;
