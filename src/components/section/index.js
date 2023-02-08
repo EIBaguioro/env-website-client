@@ -17,7 +17,7 @@ function Section(){
               width={350}
               height={300}
             />
-            <Link href='/course/category' className='course-title'>
+            <Link href='/course/beginner' className='course-title'>
               Beginner
             </Link>
           </div>
@@ -30,7 +30,7 @@ function Section(){
               width={350}
               height={300}
             />
-            <Link href='/course/category' className='course-title'>
+            <Link href='/course/intermediate' className='course-title'>
               Intermediate
             </Link>
           </div>
@@ -43,7 +43,7 @@ function Section(){
               width={350}
               height={300}
             />
-            <Link href='/course/category' className='course-title'>
+            <Link href='/course/advanced' className='course-title'>
               Advanced
             </Link>
           </div>

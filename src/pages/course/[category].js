@@ -32,9 +32,9 @@ function Category() {
   }
 
   useEffect(() => {
-    getCourses().then(data => {
-      setCourses(data)
-      setSelectedCourse(data[0]);
+    getCourses().then(availableCourses => {
+      setCourses(availableCourses);
+      setSelectedCourse(availableCourses[0]);
     });
   }, []);
 
