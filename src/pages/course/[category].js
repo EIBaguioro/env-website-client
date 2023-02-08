@@ -26,6 +26,11 @@ function Category() {
     }
   }
 
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  }
+
   const filterCourse = (id) => courses.filter( course => course.id === id);
 
   const selectCourse = (id) => {
@@ -54,11 +59,10 @@ function Category() {
               muted
               loop
               width="100%"
-            >
-            </video>
+            ></video>
             <article className={styles.description}>
               <h3>{selectedCourse.title}</h3>
-              <p>{selectedCourse.desc}</p>
+              <p>{getText(selectedCourse.desc)}</p>
               {/* <button className="btn">Enroll to this course</button> */}
             </article>
           </main>
