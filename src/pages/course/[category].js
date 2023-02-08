@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+
 import Layout from '../../components/layout';
 
 import styles from './category.module.css';
@@ -9,11 +11,14 @@ function Category() {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState({});
 
+  const router = useRouter();
+  const { category } = router.query;
+
   const getCourses = async () => {
     
     try {
       const availableCourses = await axios.get(
-        `http://localhost:8000/api/courses/filter?category="beginner"`
+        `http://localhost:8000/api/courses/filter?category=${category}`
       );
       return availableCourses.data;
     } catch(error) {
