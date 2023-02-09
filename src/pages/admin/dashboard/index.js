@@ -10,6 +10,17 @@ function Course() {
   const [courses, setCourses] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
 
+  const getAllCourses = async () => {
+    try {
+      const availableCourses = await axios.get(
+        "http://localhost:8000/api/courses"
+      );
+      return availableCourses.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleChange = (event) => {
     const item = event.target;
 
@@ -31,22 +42,28 @@ function Course() {
     setSelectedCourses([...filteredItems]);
   };
 
-  const getAllCourses = async () => {
+  const deleteCourses = async () => {
+
     try {
-      const availableCourses = await axios.get(
-        "http://localhost:8000/api/courses"
-      );
-      return availableCourses.data;
+
+      const ids = selectedCourses.map(courseObject => courseObject.id);
+
+      const response = await axios.delete('http://localhost:8000/api/courses/delete', { data: ids});
+      setSelectedCourses([]);
+
     } catch (error) {
-      console.error(error);
+      
+      console.log(error);
+
     }
-  };
+
+  }
 
   console.log(selectedCourses);
 
   useEffect(() => {
     getAllCourses().then((response) => setCourses(response));
-  }, []);
+  }, [selectedCourses]);
 
   return (
     <Layout>
@@ -57,7 +74,7 @@ function Course() {
             <div className={`flex ${styles.options}`}>
               <span>{selectedCourses.length} selected</span>
               {selectedCourses.length === 1 && <button>Edit</button>}
-              <button>Delete</button>
+              <button onClick={deleteCourses}>Delete</button>
             </div>
           )}
           <table className={styles.videos}>
