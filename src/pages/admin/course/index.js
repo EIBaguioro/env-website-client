@@ -5,13 +5,14 @@ import Head from 'next/head';
 
 import Layout from '../../../components/layout';
 
+const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+
 import 'react-quill/dist/quill.snow.css';
 import styles from './course.module.css';
 import axios from 'axios';
 
 function Course() {
   
-  const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
   const [title, setTitle] = useState('');
   const [quillForm, setQuillForm] = useState('');
