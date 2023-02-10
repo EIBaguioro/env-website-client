@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import axios from "axios";
 
 import Layout from "../../../components/layout";
@@ -73,7 +75,9 @@ function Course() {
           {selectedCourses.length > 0 && (
             <div className={`flex ${styles.options}`}>
               <span>{selectedCourses.length} selected</span>
-              {selectedCourses.length === 1 && <button>Edit</button>}
+              {selectedCourses.length === 1 && (
+                <Link href={`course/edit/${selectedCourses[0].id}`}>Edit</Link>
+              )}
               <button onClick={deleteCourses}>Delete</button>
             </div>
           )}
