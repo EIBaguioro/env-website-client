@@ -1,48 +1,70 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
+import dynamic from "next/dynamic";
+import Head from "next/head";
 
-import Layout from '../layout';
+import Layout from "../layout";
 
-const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 
-import 'react-quill/dist/quill.snow.css';
-import styles from './course-form.module.css';
-import axios from 'axios';
+import "react-quill/dist/quill.snow.css";
+import styles from "./course-form.module.css";
+import axios from "axios";
 
-function CourseForm() {
-  
-
-  const [title, setTitle] = useState('');
-  const [quillForm, setQuillForm] = useState('');
+function CourseForm({ course }) {
+  const [title, setTitle] = useState("");
+  const [quillForm, setQuillForm] = useState("");
   const [intro, setIntro] = useState(false);
   const [file, setFile] = useState(null);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
- const handleSubmit = async (event) => {
-  event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const formData = new FormData();
-  
-  formData.append("title", title);
-  formData.append("desc", quillForm);
-  formData.append("category", category)
-  formData.append("video", file);
-  formData.append("intro", intro);
+    const formData = new FormData();
 
-  await axios.post("http://localhost:8000/api/courses/create", formData, { 
-    headers: { 'Content-Type' : 'multipart/form-data' }
-   }).catch(error => console.log(error));
-  
+    formData.append("title", title);
+    formData.append("desc", quillForm);
+    formData.append("category", category);
+    formData.append("intro", intro);
 
-   setTitle('');
-   setQuillForm('');
-   setIntro('');
-   setFile(null);
-   setCategory('');
+    if (file) {
+      formData.append("video", file);
+    } else {
+      formData.append("videoUrl", course.videoUrl);
+    }
 
- }
+    if (!course) {
+      await axios
+        .post("http://localhost:8000/api/courses/create", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .catch((error) => console.log(error));
+    }
+
+    const response = await axios
+      .put(`http://localhost:8000/api/courses/${course.id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .catch((error) => console.log(error));
+
+    console.log(response);
+
+    setTitle("");
+    setQuillForm("");
+    setIntro("");
+    setFile(null);
+    setCategory("");
+  };
+
+  useEffect(() => {
+    if(course) {
+        setTitle(course.title);
+        setQuillForm(course.desc);
+        setIntro(course.intro);
+        setCategory(course.category);
+    }
+  }, [course]);
 
   return (
     <Layout>
@@ -83,9 +105,7 @@ function CourseForm() {
                   onChange={(e) => setIntro(e.target.value)}
                 >
                   <option value="true">yes</option>
-                  <option value="false">
-                    no
-                  </option>
+                  <option value="false">no</option>
                 </select>
               </div>
               <div className={styles["form-control"]}>
@@ -98,7 +118,9 @@ function CourseForm() {
                   onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
-              <button className="btn" onClick={handleSubmit}>Publish</button>
+              <button className="btn" onClick={handleSubmit}>
+                Publish
+              </button>
             </div>
             <div className={`${styles.section} categories`}>
               <h3>Categories</h3>
