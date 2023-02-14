@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 
+import { useRouter } from 'next/router';
+
 import axios from 'axios';
 
 const AppContext = React.createContext();
@@ -11,6 +13,8 @@ const AppProvider = ({ children }) => {
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState({});
+
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -25,7 +29,7 @@ const AppProvider = ({ children }) => {
         .then(({ data }) => {
           setUser(data);
           setError({});
-          setSuccess(true);
+          router.push('/');
         })
         .catch((error) => {
           const { response } = error;
@@ -36,7 +40,7 @@ const AppProvider = ({ children }) => {
       setPassword("");
     };
 
-    return <AppContext.Provider value={{error, email, setEmail, password, setPassword, handleSubmit, user}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{error, success,  email, setEmail, password, setPassword, handleSubmit, user}}>{children}</AppContext.Provider>
 }
 
 export const useGlobalContext = () => {
