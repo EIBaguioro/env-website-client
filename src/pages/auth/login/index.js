@@ -1,40 +1,11 @@
-import { useState } from "react";
-
 import Link from "next/link";
 
-import axios from "axios";
-
 import styles from "./login.module.css";
+import { useGlobalContext } from "@/components/context";
 
 function Login() {
-  const [user, setUser] = useState({});
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if(email === "" || password === "") return setError({message: "Please provide both the email and password"});
-
-    await axios
-      .post("http://localhost:8000/api/auth/login", { email, password })
-      .then(({ data }) => {
-        setUser(data);
-        setError({})
-        setSuccess(true);
-      })
-      .catch((error) => {
-        const { response } = error;
-        console.log(response.data);
-        setError(response.data);
-      });
-      setEmail("");
-      setPassword("");
-  };
-
-  console.log(user)
+  const { error, email, setEmail, password, setPassword, handleSubmit } = useGlobalContext();
 
   return (
     <div id={styles["login"]}>
