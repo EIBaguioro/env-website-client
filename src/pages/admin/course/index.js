@@ -1,8 +1,12 @@
-import CourseForm from "@/components/course-form"
+import CourseForm from "@/components/course-form";
+import { ProtectedRoute } from "@/components/protected-route/protected-route";
 
-
-function Course () {
-  return <CourseForm />
+function Course() {
+  return (
+    <ProtectedRoute>
+      <CourseForm />
+    </ProtectedRoute>
+  );
 }
 
-export default Course
+export default Course;

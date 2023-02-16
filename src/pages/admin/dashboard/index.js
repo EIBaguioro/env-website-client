@@ -5,6 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 
 import Layout from "../../../components/layout";
+import { ProtectedRoute } from "@/components/protected-route/protected-route";
 
 import styles from "./dashboard.module.css";
 
@@ -68,53 +69,57 @@ function Course() {
   }, [selectedCourses]);
 
   return (
-    <Layout>
-      <div id="dashboard">
-        <div className={`container ${styles.dashboard}`}>
-          <h3>Videos</h3>
-          {selectedCourses.length > 0 && (
-            <div className={`flex ${styles.options}`}>
-              <span>{selectedCourses.length} selected</span>
-              {selectedCourses.length === 1 && (
-                <Link href={`course/edit/${selectedCourses[0].id}`}>Edit</Link>
-              )}
-              <button onClick={deleteCourses}>Delete</button>
-            </div>
-          )}
-          <table className={styles.videos}>
-            <thead>
-              <tr>
-                <th> </th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {courses.map((course) => {
-                const { id, title, category, createdAt } = course;
+    <ProtectedRoute>
+      <Layout>
+        <div id="dashboard">
+          <div className={`container ${styles.dashboard}`}>
+            <h3>Videos</h3>
+            {selectedCourses.length > 0 && (
+              <div className={`flex ${styles.options}`}>
+                <span>{selectedCourses.length} selected</span>
+                {selectedCourses.length === 1 && (
+                  <Link href={`course/edit/${selectedCourses[0].id}`}>
+                    Edit
+                  </Link>
+                )}
+                <button onClick={deleteCourses}>Delete</button>
+              </div>
+            )}
+            <table className={styles.videos}>
+              <thead>
+                <tr>
+                  <th> </th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => {
+                  const { id, title, category, createdAt } = course;
 
-                return (
-                  <tr key={id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        name={title}
-                        onChange={handleChange}
-                        data-id={id}
-                      />
-                    </td>
-                    <td>{title}</td>
-                    <td>{category}</td>
-                    <td>{createdAt}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                  return (
+                    <tr key={id}>
+                      <td>
+                        <input
+                          type="checkbox"
+                          name={title}
+                          onChange={handleChange}
+                          data-id={id}
+                        />
+                      </td>
+                      <td>{title}</td>
+                      <td>{category}</td>
+                      <td>{createdAt}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </ProtectedRoute>
   );
 }
 

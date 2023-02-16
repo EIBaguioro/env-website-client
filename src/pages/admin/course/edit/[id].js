@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import CourseForm from "@/components/course-form";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { ProtectedRoute } from "@/components/protected-route/protected-route";
 
 function Course() {
-
   const [courseToEdit, setCourseToEdit] = useState({});
 
   const router = useRouter();
@@ -20,7 +20,11 @@ function Course() {
       .catch((error) => console.log(error));
   }, []);
 
-  return <CourseForm course={courseToEdit} />;
+  return (
+    <ProtectedRoute>
+      <CourseForm course={courseToEdit} />
+    </ProtectedRoute>
+  );
 }
 
 export default Course;

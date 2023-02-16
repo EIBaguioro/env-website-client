@@ -11,35 +11,47 @@ function Topnav() {
   const currentPath = router.pathname;
 
   return (
-    <nav id={styles['topnav']}>
+    <nav id={styles["topnav"]}>
       <div className={`container flex ${styles.topnav}`}>
-        <Link href="/" className={styles.logo}>ENV.</Link>
+        <Link href="/" className={styles.logo}>
+          ENV.
+        </Link>
         <ul className={styles.navlist}>
           <li>
-            <Link href='/' className={currentPath === '/' ? styles.active : ''}>
+            <Link href="/" className={currentPath === "/" ? styles.active : ""}>
               Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/admin/dashboard"
+              className={
+                currentPath === "/admin/dashboard" ? styles.active : ""
+              }
+            >
+              dashboard
             </Link>
           </li>
           {!isLoggedIn ? (
             <>
               <li>
                 <Link
-                  href='/auth/login'
-                  className={currentPath === '/auth/login' ? styles.active : ''}
+                  href="/auth/login"
+                  className={currentPath === "/auth/login" ? styles.active : ""}
                 >
                   Login
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/auth/signup'
+                  href="/auth/signup"
                   className={
-                    currentPath === '/auth/signup' ? styles.active : ''
+                    currentPath === "/auth/signup" ? styles.active : ""
                   }
                 >
                   Sign up
                 </Link>
-              </li>{' '}
+              </li>{" "}
             </>
           ) : (
             <li className={styles.greeting}>HI USER</li>
