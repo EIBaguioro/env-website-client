@@ -40,15 +40,13 @@ function CourseForm({ course }) {
           headers: { "Content-Type": "multipart/form-data" },
         })
         .catch((error) => console.log(error));
+    } else {
+      const response = await axios
+        .put(`http://localhost:8000/api/courses/${course.id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .catch((error) => console.log(error));
     }
-
-    const response = await axios
-      .put(`http://localhost:8000/api/courses/${course.id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .catch((error) => console.log(error));
-
-    console.log(response);
 
     setTitle("");
     setQuillForm("");

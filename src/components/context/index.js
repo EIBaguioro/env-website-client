@@ -26,9 +26,9 @@ const AppProvider = ({ children }) => {
 
       await axios
         .post("http://localhost:8000/api/auth/login", { email, password })
-        .then(({ data }) => {
-          setUser(data);
-          setError({});
+        .then(({ data: { access_token, user} }) => {
+          console.log(access_token)
+          console.log(user);
           router.push('/');
         })
         .catch((error) => {
