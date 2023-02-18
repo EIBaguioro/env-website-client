@@ -13,6 +13,8 @@ function Topnav() {
   const router = useRouter();
   const currentPath = router.pathname;
 
+  const { category } = router.query;
+
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('user');
@@ -39,6 +41,8 @@ function Topnav() {
       setIsLoggedin(true);
     }
   }, [])
+
+  console.log(category);
 
   return (
     <nav id={styles["topnav"]}>
@@ -72,6 +76,34 @@ function Topnav() {
                   }
                 >
                   Add Course
+                </Link>
+              </li>
+            </>
+          )}
+          {isLoggedIn && (
+            <>
+              <li>
+                <Link
+                  href="/course/beginner"
+                  className={category === "beginner" ? styles.active : ""}
+                >
+                  Beginner
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/course/intermediate"
+                  className={category === "intermediate" ? styles.active : ""}
+                >
+                  Intermediate
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/course/advanced"
+                  className={category === "advanced" ? styles.active : ""}
+                >
+                  Advanced
                 </Link>
               </li>
               <li>
