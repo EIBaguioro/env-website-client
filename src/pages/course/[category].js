@@ -44,9 +44,10 @@ function Category() {
   useEffect(() => {
     getCourses().then((availableCourses) => {
       setCourses(availableCourses);
+      setSelectedCourse({});
       if (availableCourses.length > 0) setSelectedCourse(availableCourses[0]);
     });
-  }, []);
+  }, [category]);
 
   return (
     <Layout>

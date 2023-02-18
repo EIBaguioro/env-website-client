@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import axios from 'axios';
+import axios from "axios";
 
-import styles from './topnav.module.css';
+import styles from "./topnav.module.css";
 
 function Topnav() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedin] = useState(false);
   const router = useRouter();
   const currentPath = router.pathname;
@@ -17,32 +17,34 @@ function Topnav() {
 
   const logout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('user');
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
     setIsLoggedin(false);
-    router.push('/');
-  }
+    router.push("/");
+  };
 
   useEffect(() => {
-    setUser(() => JSON.parse(localStorage.getItem('user')));
-    if(localStorage.getItem('accessToken')) {
-
+    setUser(() => JSON.parse(localStorage.getItem("user")));
+    if (localStorage.getItem("accessToken")) {
       const config = {
-        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
-      }
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
 
-       axios.get("http://localhost:8000/api/auth/token", config).then((response) => {
-        console.log(response)
-      }).catch((error) => {  
-        setIsLoggedin(false)
-        localStorage.removeItem('accessToken');
-      })
+      axios
+        .get("http://localhost:8000/api/auth/token", config)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          setIsLoggedin(false);
+          localStorage.removeItem("accessToken");
+        });
 
       setIsLoggedin(true);
     }
-  }, [])
-
-  console.log(category);
+  }, []);
 
   return (
     <nav id={styles["topnav"]}>
@@ -80,39 +82,39 @@ function Topnav() {
               </li>
             </>
           )}
-          {isLoggedIn && (
-            <>
-              <li>
-                <Link
-                  href="/course/beginner"
-                  className={category === "beginner" ? styles.active : ""}
-                >
-                  Beginner
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/course/intermediate"
-                  className={category === "intermediate" ? styles.active : ""}
-                >
-                  Intermediate
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/course/advanced"
-                  className={category === "advanced" ? styles.active : ""}
-                >
-                  Advanced
-                </Link>
-              </li>
-              <li>
-                <a href="#" onClick={logout}>
-                  Log out
-                </a>
-              </li>
-            </>
-          )}
+
+          <li>
+            <Link
+              href="/course/beginner"
+              className={category === "beginner" ? styles.active : ""}
+            >
+              Beginner
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/course/intermediate"
+              className={category === "intermediate" ? styles.active : ""}
+            >
+              Intermediate
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/course/advanced"
+              className={category === "advanced" ? styles.active : ""}
+            >
+              Advanced
+            </Link>
+          </li>
+          {isLoggedIn &&
+          <li>
+            <a href="#" onClick={logout}>
+              Log out
+            </a>
+          </li>
+          }
+
           {!isLoggedIn ? (
             <>
               <li>
