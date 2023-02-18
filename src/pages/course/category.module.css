@@ -1,5 +1,9 @@
 #category {
+    
+}
 
+.category {
+    min-height: calc(100vh - 100px);
 }
 
 .category main {
@@ -33,6 +37,7 @@
 
 .category > p {
     font-size: 3.5rem;
+    align-self: center;
     margin: 0 auto;
 }
 
