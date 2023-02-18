@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 
 import axios from 'axios';
 
-import { useGlobalContext } from '../context';
 import styles from './topnav.module.css';
 
 function Topnav() {
@@ -13,6 +12,14 @@ function Topnav() {
   const [isLoggedIn, setIsLoggedin] = useState(false);
   const router = useRouter();
   const currentPath = router.pathname;
+
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    setIsLoggedin(false);
+    router.push('/');
+  }
 
   useEffect(() => {
     setUser(() => JSON.parse(localStorage.getItem('user')));
@@ -45,7 +52,7 @@ function Topnav() {
               Home
             </Link>
           </li>
-          {(isLoggedIn && user.isAdmin) && (
+          {isLoggedIn && user.isAdmin && (
             <>
               <li>
                 <Link
@@ -66,6 +73,11 @@ function Topnav() {
                 >
                   Add Course
                 </Link>
+              </li>
+              <li>
+                <a href="#" onClick={logout}>
+                  Log out
+                </a>
               </li>
             </>
           )}
