@@ -8,7 +8,6 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
 
-    const [user, setUser] = useState({});
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState({});
@@ -27,7 +26,7 @@ const AppProvider = ({ children }) => {
         .post("http://localhost:8000/api/auth/login", { email, password })
         .then(({ data: { access_token, user} }) => {
           localStorage.setItem('accessToken', access_token);
-          setUser(user);
+          localStorage.setItem('user', JSON.stringify(user));
           router.push('/');
         })
         .catch((error) => {
@@ -38,7 +37,7 @@ const AppProvider = ({ children }) => {
       setPassword("");
     };
 
-    return <AppContext.Provider value={{error,  email, setEmail, password, setPassword, handleSubmit, user}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{error,  email, setEmail, password, setPassword, handleSubmit}}>{children}</AppContext.Provider>
 }
 
 export const useGlobalContext = () => {

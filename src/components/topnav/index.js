@@ -9,13 +9,13 @@ import { useGlobalContext } from '../context';
 import styles from './topnav.module.css';
 
 function Topnav() {
+  const [user, setUser] = useState({})
   const [isLoggedIn, setIsLoggedin] = useState(false);
   const router = useRouter();
   const currentPath = router.pathname;
 
-  const { user } = useGlobalContext();
-
   useEffect(() => {
+    setUser(() => JSON.parse(localStorage.getItem('user')));
     if(localStorage.getItem('accessToken')) {
 
       const config = {

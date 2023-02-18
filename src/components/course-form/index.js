@@ -37,13 +37,16 @@ function CourseForm({ course }) {
     if (!course) {
       await axios
         .post("http://localhost:8000/api/courses/create", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
         })
         .catch((error) => console.log(error));
     } else {
       const response = await axios
         .put(`http://localhost:8000/api/courses/${course.id}`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
         })
         .catch((error) => console.log(error));
     }

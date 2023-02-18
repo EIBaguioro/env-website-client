@@ -16,7 +16,14 @@ function Course() {
   const getAllCourses = async () => {
     try {
       const availableCourses = await axios.get(
-        "http://localhost:8000/api/courses"
+        "http://localhost:8000/api/courses",
+        {
+          headers: {
+            common: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          },
+        }
       );
       return availableCourses.data;
     } catch (error) {
@@ -51,7 +58,14 @@ function Course() {
 
       const ids = selectedCourses.map(courseObject => courseObject.id);
 
-      const response = await axios.delete('http://localhost:8000/api/courses/delete', { data: ids});
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        data: ids,
+      };
+
+      const response = await axios.delete('http://localhost:8000/api/courses/delete', config);
       setSelectedCourses([]);
 
     } catch (error) {
@@ -61,8 +75,6 @@ function Course() {
     }
 
   }
-
-  console.log(selectedCourses);
 
   useEffect(() => {
     getAllCourses().then((response) => setCourses(response));

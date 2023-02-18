@@ -11,7 +11,14 @@ function Course() {
   const { id } = router.query;
 
   const getCourse = async () => {
-    return await axios.get(`http://localhost:8000/api/courses/${id}`);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      }
+    };
+
+    return await axios.get(`http://localhost:8000/api/courses/${id}`, config);
   };
 
   useEffect(() => {
