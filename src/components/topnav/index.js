@@ -31,16 +31,30 @@ function Topnav() {
               Home
             </Link>
           </li>
-          {isLoggedIn && <li>
-            <Link
-              href="/admin/dashboard"
-              className={
-                currentPath === "/admin/dashboard" ? styles.active : ""
-              }
-            >
-              Dashboard
-            </Link>
-          </li>}
+          {(isLoggedIn && user.isAdmin) && (
+            <>
+              <li>
+                <Link
+                  href="/admin/dashboard"
+                  className={
+                    currentPath === "/admin/dashboard" ? styles.active : ""
+                  }
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/admin/course"
+                  className={
+                    currentPath === "/admin/course" ? styles.active : ""
+                  }
+                >
+                  Add Course
+                </Link>
+              </li>
+            </>
+          )}
           {!isLoggedIn ? (
             <>
               <li>
