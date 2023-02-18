@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import axios from 'axios';
+
 import { useGlobalContext } from '../context';
 import styles from './topnav.module.css';
 
@@ -15,6 +17,18 @@ function Topnav() {
 
   useEffect(() => {
     if(localStorage.getItem('accessToken')) {
+
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+      }
+
+       axios.get("http://localhost:8000/api/auth/token", config).then((response) => {
+        console.log(response)
+      }).catch((error) => {  
+        setIsLoggedin(false)
+        localStorage.removeItem('accessToken');
+      })
+
       setIsLoggedin(true);
     }
   }, [])

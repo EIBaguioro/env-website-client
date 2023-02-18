@@ -6,9 +6,12 @@ export const ProtectedRoute = ({children}) => {
     const router = useRouter();
 
     useEffect(() => {
-        if(localStorage.getItem("accessToken") === null) {
-            router.push('/auth/login');
-        }
+        const interval = setInterval(() => {
+            if(localStorage.getItem("accessToken") === null) {
+              router.push("/auth/login");
+            }
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     return <>{children}</>
