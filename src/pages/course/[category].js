@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
-import Layout from '../../components/layout';
+import Layout from "../../components/layout";
 
-import styles from './category.module.css';
+import styles from "./category.module.css";
 
 function Category() {
-
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState({});
 
@@ -15,36 +14,37 @@ function Category() {
   const { category } = router.query;
 
   const getCourses = async () => {
-    
     try {
       const availableCourses = await axios.get(
         `http://localhost:8000/api/courses/filter?category=${category}`
       );
       return availableCourses.data;
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent;
-  }
+  };
 
-  const filterCourse = (id) => courses.filter( course => course.id === id);
+  const filterCourse = (id) => courses.filter((course) => course.id === id);
 
   const selectCourse = (id) => {
-
     const filteredCourse = filterCourse(id);
 
     setSelectedCourse(...filteredCourse);
+  };
 
-  }
+  const isObjectEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
 
   useEffect(() => {
-    getCourses().then(availableCourses => {
+    getCourses().then((availableCourses) => {
       setCourses(availableCourses);
-      setSelectedCourse(availableCourses[0]);
+      if (availableCourses.length > 0) setSelectedCourse(availableCourses[0]);
     });
   }, []);
 
@@ -52,37 +52,41 @@ function Category() {
     <Layout>
       <div id={styles["category"]}>
         <div className={`container flex ${styles.category}`}>
-          <main>
-            <video
-              src={selectedCourse.videoUrl}
-              controls
-              muted
-              loop
-              width="100%"
-            ></video>
-            <article className={styles.description}>
-              <h3>{selectedCourse.title}</h3>
-              <p>{getText(selectedCourse.desc)}</p>
-              {/* <button className="btn">Enroll to this course</button> */}
-            </article>
-          </main>
-          <aside className={styles.sidenav}>
-            <h3>Course Content</h3>
-            <ul>
-              {courses.map(({ id, title }) => {
-                return (
-                  <li key={id} onClick={() => selectCourse(id)}>
-                    {title}
-                  </li>
-                );
-              })}
-            </ul>
-          </aside>
+          {isObjectEmpty(selectedCourse) ? (
+            <p>No Available Courses</p>
+          ) : (
+            <>
+              <main>
+                <video
+                  src={selectedCourse.videoUrl}
+                  controls
+                  muted
+                  loop
+                  width="100%"
+                ></video>
+                <article className={styles.description}>
+                  <h3>{selectedCourse.title}</h3>
+                  <p>{getText(selectedCourse.desc)}</p>
+                </article>
+              </main>
+              <aside className={styles.sidenav}>
+                <h3>Course Content</h3>
+                <ul>
+                  {courses.map(({ id, title }) => {
+                    return (
+                      <li key={id} onClick={() => selectCourse(id)}>
+                        {title}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </aside>
+            </>
+          )}
         </div>
       </div>
     </Layout>
   );
 }
-
 
 export default Category;
