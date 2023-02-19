@@ -26,3 +26,10 @@
     padding: 1rem 3rem;
     text-align: center;
 }
+
+.btn-add {
+    font-size: 1.2rem;
+    font-weight: 700;
+    bottom: 4rem;
+    right: 1.5rem;
+}

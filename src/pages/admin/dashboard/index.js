@@ -127,6 +127,18 @@ function Course() {
                   );
                 })}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="4">
+                    <Link
+                      href="/admin/course"
+                      className={`btn ${styles["btn-add"]}`}
+                    >
+                      &#43; Add Course
+                    </Link>
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>
