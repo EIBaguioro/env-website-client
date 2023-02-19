@@ -70,16 +70,6 @@ function Topnav() {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/admin/course"
-                  className={
-                    currentPath === "/admin/course" ? styles.active : ""
-                  }
-                >
-                  Add Course
-                </Link>
-              </li>
             </>
           )}
 
